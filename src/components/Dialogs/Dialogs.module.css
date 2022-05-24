@@ -13,6 +13,7 @@
 }
 
 .dialog {
+border: 1px solid black;
 
 }
 
@@ -23,4 +24,10 @@
 
 .message {
 
+}
+.dialog img{
+    margin: 0 30px 0 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
