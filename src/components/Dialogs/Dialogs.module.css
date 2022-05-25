@@ -13,16 +13,17 @@
 }
 
 .dialog {
-border: 1px solid black;
 
 }
 
 .messages {
+    border: 1px solid black;
     padding: 10px;
 
 }
 
 .message {
+
 
 }
 .dialog img{
@@ -30,4 +31,9 @@ border: 1px solid black;
     border-radius: 50%;
     width: 50px;
     height: 50px;
+}
+.message:nth-child(even){
+    display: flex;
+    justify-content: flex-end;
+
 }
