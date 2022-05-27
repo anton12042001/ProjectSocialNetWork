@@ -4,7 +4,7 @@ import classes from "./../Navbar.module.css";
 
 const  Friends = (props) => {
 
-    let friendsItem = props.friends.map(f => <FriendsItem id={f.id} name={f.name} avatarUrl={f.avatarUrl}/>);
+    let friendsItem = props.friends.map(f => <FriendsItem id={f.id} name={f.name} avatarUrl={f.avatarUrl} key={f.id}/>);
 
 
     return (
