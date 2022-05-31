@@ -1,20 +1,20 @@
 import React from 'react';
 import './index.css';
-import store from "./redux/state";
+import store from "./redux/redux-store";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 let rerenderEntireTree = (state) => {
+    debugger
     root.render(
         <React.StrictMode>
             <App
                  state={state}
-                 dispath={store.dispath.bind(store)} />
+                 dispatch={store.dispatch.bind(store)} />
         </React.StrictMode>
     );
 }
@@ -22,6 +22,8 @@ reportWebVitals();
 
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
 
-reportWebVitals();

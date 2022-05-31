@@ -5,11 +5,12 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {updateNewMessageText, updateNewPostText} from "./redux/state";
+
 
 
 
 function App(props) {
+    debugger
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -18,9 +19,9 @@ function App(props) {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path= '/profile'
-                               element = {<Profile dispath={props.dispath} profilePage={props.state.profilePage}/>}/>
+                               element = {<Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/>
                         <Route path= '/dialogs/*'
-                               element = {<Dialogs dispath={props.dispath} state={props.state.dialogsPage}/>}/>
+                               element = {<Dialogs dispatch={props.dispatch} state={props.state.dialogsPage}/>}/>
                     </Routes>
                 </div>
             </div>
