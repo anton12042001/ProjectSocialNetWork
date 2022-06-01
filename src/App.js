@@ -19,15 +19,9 @@ function App(props) {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path= '/profile'
-<<<<<<< HEAD
                                element = {<Profile store={props.store}/>}/>
                         <Route path= '/dialogs/*'
                                element = {<Dialogs store={props.store}/>}/>
-=======
-                               element = {<Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/>
-                        <Route path= '/dialogs/*'
-                               element = {<Dialogs dispatch={props.dispatch} state={props.state.dialogsPage}/>}/>
->>>>>>> 720f688ee08b8e5409f12e005b7121b755439d82
                     </Routes>
                 </div>
             </div>
