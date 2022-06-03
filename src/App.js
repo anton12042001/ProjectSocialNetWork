@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 
@@ -21,7 +22,7 @@ function App(props) {
                         <Route path= '/profile'
                                element = {<Profile store={props.store}/>}/>
                         <Route path= '/dialogs/*'
-                               element = {<Dialogs store={props.store}/>}/>
+                               element = {<DialogsContainer  store={props.store}/>}/>
                     </Routes>
                 </div>
             </div>

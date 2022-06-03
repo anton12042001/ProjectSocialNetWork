@@ -2,14 +2,13 @@ import React from 'react';
 import './index.css';
 import store from "./redux/redux-store";
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 let rerenderEntireTree = (state) => {
-    debugger
+
     root.render(
         <React.StrictMode>
             <App
