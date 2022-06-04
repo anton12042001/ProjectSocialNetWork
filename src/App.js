@@ -11,18 +11,17 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 function App(props) {
-    debugger
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friends={props.state.friendsPage.friends}/>
+                <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path= '/profile'
-                               element = {<Profile store={props.store}/>}/>
+                               element = {<Profile/>}/>
                         <Route path= '/dialogs/*'
-                               element = {<DialogsContainer  store={props.store}/>}/>
+                               element = {<DialogsContainer/>}/>
                     </Routes>
                 </div>
             </div>

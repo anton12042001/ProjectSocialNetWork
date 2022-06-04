@@ -3,6 +3,7 @@ import classes from "./Navbar.module.css";
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
 
+
 const Navbar = (props) => {
     return (
         <nav className={classes.nav}>
@@ -13,7 +14,13 @@ const Navbar = (props) => {
             <div className={classes.item}><a href="">Settings</a></div>
             <div className={classes.item + ' ' + classes.blockFriends}>
                 <NavLink  className={(navData) => navData.isActive ? classes.active : ''} to="/friends">Friends</NavLink>
-                <Friends friends={props.friends} />
+                <StoreContext.Consumer>
+                    {
+                        (store) => {
+                            return <Friends friendsElement={store.getState().friendsPage} />
+                        }
+                    }
+                </StoreContext.Consumer>
             </div>
         </nav>
     );
