@@ -5,14 +5,14 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
     newMessageText: "hi, it's anton",
-        messages: [
+    messages: [
         {id: 1, message: "Hi"},
         {id: 2, message: "How is your it-kamasutra?"},
         {id: 3, message: "Yo"},
         {id: 4, message: "Yo"},
         {id: 5, message: "Yo"},
     ],
-        dialogs: [
+    dialogs: [
         {
             id: 1,
             name: "Anton",
@@ -45,22 +45,19 @@ let initialState = {
 
 const DialogsReducer = (state = initialState, action) => {
 
-
-    let stateCopy = {
-        ...state,
-        // messages: [...state.messages],
-    }
     switch (action.type) {
         case ADD_MESSAGE:
-            let newMessage = {
-                id: 6, message: state.newMessageText
+            let text = state.newMessageText
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: 6, message: text} ],
             }
-            stateCopy.newMessageText = ''
-            stateCopy.messages.push(newMessage)
-            return stateCopy;
         case UPDATE_NEW_MESSAGE_TEXT:
-            stateCopy.newMessageText = action.newTextMessage
-            return stateCopy;
+            return  {
+                ...state,
+                newMessageText: action.newTextMessage,
+            }
         default:
             return state;
     }
