@@ -4,25 +4,40 @@ import * as axios from "axios";
 import userPhoto from "../../assets/images/user.png"
 
 
-const Users = (props) => {
-    let getUsers = () => {
-        if(props.users.length === 0){
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                debugger
-                props.setUsers(response.data.items)
-            })
-        }
+class Users extends React.Component {
+
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            debugger
+            this.props.setUsers(response.data.items)
+        })
     }
 
 
-    return (
+    getUsers = () => {
+    }
 
-        <div>
-            <button onClick={getUsers} >Get users</button>
+    render(){
+        let pagesCount = this.props.totalUsersCount / this.props.pageSize;
 
-            {
-                props.users.map(u =>
-                    <div key={u.id}>
+        let pages = [];
+        for (let i=0; i < pagesCount)
+
+
+        return (
+            <div>
+                <div>
+                   <span>1</span>
+                   <span className={classes.selectetPage} >2</span>
+                   <span>3</span>
+                   <span>4</span>
+                   <span>5</span>
+                </div>
+                <button onClick={this.getUsers} >Get users</button>
+
+                {
+                    this.props.users.map(u =>
+                        <div key={u.id}>
                     <span>
                         <div>
                             <img src={  u.photos.small != null ? u.photos.small : userPhoto } className={classes.userPhoto}/>
@@ -31,15 +46,15 @@ const Users = (props) => {
                             {
                                 u.followed
                                     ? <button onClick={() => {
-                                        props.unfollow(u.id)
+                                        this.props.unfollow(u.id)
                                     }}>UnFollow</button>
                                     : <button onClick={() => {
-                                        props.follow(u.id)
+                                        this.props.follow(u.id)
                                     }}>Follow</button>
                             }
                         </div>
                     </span>
-                        <span>
+                            <span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -49,10 +64,11 @@ const Users = (props) => {
                             <div>{"u.location.city"}</div>
                         </span>
                     </span>
-                    </div>)
-            }
-        </div>
-    );
-};
+                        </div>)
+                }
+            </div>
+        );
+    }
+}
 
 export default Users;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {followAC, setUsersAc, unfollowAC} from "../../redux/user-reducer";
-import Users from "./UsersC";
+import Users from "./Users";
 
 
 
@@ -9,7 +9,9 @@ import Users from "./UsersC";
 
 let mapStateToProps = (state) => {
     return{
-        users:state.usersPage.users
+        users:state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
     }
 }
 
