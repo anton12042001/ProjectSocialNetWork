@@ -10,13 +10,12 @@ import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer"
 
 function App(props) {
     return (
-
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/profile*'
+                    <Route path='/profile/*'
                            element={<ProfileContainer/>}/>
                     <Route path='/dialogs/*'
                            element={<DialogsContainer/>}/>

@@ -1,9 +1,14 @@
 import React from 'react';
 import classes from './ProfileInfo.module.css';
+import Preloader from "../../common/Preloader/Preloader";
+import ProfileDescription from "./ProfileDescription";
 
 
-class ProfileInfo extends React.Component {
-    render() {
+const ProfileInfo = (props) =>  {
+
+    if(!props.profile){
+        return <Preloader/>
+    }
         return (
             <div>
                 <div className={classes.headerImg}>
@@ -12,11 +17,13 @@ class ProfileInfo extends React.Component {
                         alt=""/>
                 </div>
                 <div className={classes.descriptionBlock}>
-                    ava+description
+                    <ProfileDescription profileDescription={props}/>
                 </div>
             </div>
+
         );
-    }
 };
 
 export default ProfileInfo;
+
+
