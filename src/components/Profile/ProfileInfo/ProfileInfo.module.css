@@ -1,4 +1,8 @@
-
+.descriptionInfo{
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+}
 .headerImg img{
     height: 350px;
 }
