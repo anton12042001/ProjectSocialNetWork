@@ -9,8 +9,14 @@ const Header = (props) => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Vanamo_Logo.svg/1200px-Vanamo_Logo.svg.png"
                 alt=""/>
             <div className={classes.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>
-                }
+                <div className={classes.loginLB}>
+                    {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>
+                    }
+                </div>
+                <div className={classes.photoAuthLB}>
+                    {props.isAuth ? props.currentUser : " "}
+                </div>
+
             </div>
         </header>
     );
