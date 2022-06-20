@@ -64,7 +64,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingProgress: state.usersPage.followingInProgress,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
