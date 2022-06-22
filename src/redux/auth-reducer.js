@@ -35,7 +35,7 @@ export const setAuthCurrentUser = (currentUser) => ({type: SET_AUTH_CURRENT_USER
 export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}})
 
 
-export const authMe = () => {
+export const getAuthUserData = () => {
     return (dispatch) => {
         userAPI.headerMe()
             .then(response => {
