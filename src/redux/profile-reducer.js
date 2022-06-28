@@ -3,17 +3,15 @@ import {profileAPI, usersAPI, usersAPI as userAPI} from "../api/api";
 import {setAuthCurrentUser, setAuthUserData} from "./auth-reducer";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
     posts: [
-        {id: 1, messages: "Hi, how are you?", likesCount: 12},
-        {id: 2, messages: "it's my first post", likesCount: 11},
-        {id: 3, messages: "it's my firfsafasost", likesCount: 11},
+        {id: 1, message: "Hi, how are you?", likesCount: 12},
+        {id: 2, message: "it's my first post", likesCount: 11},
+        {id: 3, message: "it's my firfsafasost", likesCount: 11},
     ],
-    newPostText: "it-kamasutra.com",
     profile: null,
     status: "",
 }
@@ -21,15 +19,16 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
-            return{
-                posts: [...state.posts, {id: 5, messages: state.newPostText, likesCount: 5,} ],
-                newPostText: ''
+            debugger
+            let newPost = {
+                id: 5,
+                message: action.addNewPostText,
+                likesCount: 0,
             }
-        }
-        case UPDATE_NEW_POST_TEXT: {
+            debugger
             return{
-                ...state,
-                newPostText: action.newText
+                posts: [...state.posts, newPost ],
+                newPostText: ''
             }
         }
         case SET_USER_PROFILE: {
@@ -53,9 +52,7 @@ const profileReducer = (state = initialState, action) => {
 };
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
-export const addPostActionCreator = () => ({type: ADD_POST,})
-export const updateNewPostTextActionCreator = (text) =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text,})
+export const addPostActionCreator = (addNewPostText) =>({type: ADD_POST, addNewPostText  })
 
 
 export const getUserProfile = (userId) => {
@@ -72,7 +69,6 @@ export const getStatus = (userId) => {
     return (dispatch) => {
         profileAPI.getStatus(userId)
             .then(response => {
-                debugger
                 dispatch(setStatus(response.data))
             })
     }

@@ -18,8 +18,6 @@ const LoginInputSheme = (props) => {
     const onSubmit = (data) => {
         alert(JSON.stringify(data))
         reset()
-
-
     }
     return (
         <div>

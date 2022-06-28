@@ -32,15 +32,15 @@ const Dialogs = (props) => {
                 {messagesElement}
             </div>
             <div>Показать больше диалогов</div>
-            <div className={classes.addMessagesPage}>
-                <div className={classes.addMessagesPageTextarea}>
-                    <textarea onChange={onMessageChange} value={state.newMessageText} ref={newMessagesElement}
-                              cols="100" rows="10"/>
-                </div>
-                <div className={classes.addMessagesPageButton}>
-                    <button onClick={onAddMessages}>Отправить сообщение</button>
-                </div>
-            </div>
+            {/*<div className={classes.addMessagesPage}>*/}
+            {/*    <div className={classes.addMessagesPageTextarea}>*/}
+            {/*        <textarea onChange={onMessageChange} value={state.newMessageText} ref={newMessagesElement}*/}
+            {/*                  />*/}
+            {/*    </div>*/}
+            {/*    <div className={classes.addMessagesPageButton}>*/}
+            {/*        <button onClick={onAddMessages}>Отправить сообщение</button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
     );
 };
