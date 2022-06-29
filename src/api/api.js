@@ -23,12 +23,7 @@ export const usersAPI = {
     unfollow(userId){
       return  instance.delete(`follow/${userId}`)
     },
-    headerMe(){
-        return instance.get(`auth/me`)
-    },
-    headerAuthPhoto(userIdAuth){
-        return instance.get(`profile/` + userIdAuth)
-    },
+
     getProfile(userId){
         console.warn("Obsolete method. Please use profileAPI object")
         return  profileAPI.getProfile(userId)
@@ -46,4 +41,21 @@ export const profileAPI = {
     updateStatus(status) {
         return  instance.put(`profile/status` ,{status: status})
     }
+}
+
+export const authAPI = {
+    headerAuthPhoto(userIdAuth){
+        return instance.get(`profile/` + userIdAuth)
+    },
+    me() {
+        return  instance.get('auth/me')
+    },
+    login(email, password, rememberMe = false) {
+        return  instance.post('auth/login', {email, password, rememberMe})
+    },
+
+    logout() {
+        return  instance.delete('auth/login')
+    },
+
 }

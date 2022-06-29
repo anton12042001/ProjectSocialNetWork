@@ -2,6 +2,7 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 
 const LoginInputSheme = (props) => {
+    debugger
 
     const {
         register,
@@ -16,17 +17,18 @@ const LoginInputSheme = (props) => {
     })
 
     const onSubmit = (data) => {
+        debugger
         alert(JSON.stringify(data))
+        props.loginInfo(data)
         reset()
     }
     return (
         <div>
-            <h1>Login</h1>
             <form onSubmit={handleSubmit(onSubmit)} action="">
                 <label>
                     Login
                     <input
-                        {...register('login', {
+                        {...register('email', {
                             required: "Поле обязательно к заполнению",
                             minLength: {
                                 value: 5,
@@ -59,7 +61,7 @@ const LoginInputSheme = (props) => {
                 <label>
                     Запомнить меня
                     <input type={"checkbox"}
-                           {...register('remeberMe',)}
+                           {...register('rememberMe',)}
                     />
                 </label>
 

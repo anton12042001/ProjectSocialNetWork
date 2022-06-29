@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import { Navigate } from "react-router-dom";
 import Message from "./Message/Message";
+import DialogsFormSheme from "./DialogsFormSheme/DialogsFormSheme";
 
 const Dialogs = (props) => {
 
@@ -13,13 +14,8 @@ const Dialogs = (props) => {
     let newMessagesElement = React.createRef();
 
 
-    let onAddMessages = () => {
-        props.addMessage()
-    }
-
-    let onMessageChange = () => {
-        let text = newMessagesElement.current.value
-        props.updateNewMessageText(text)
+    let onAddMessages = (sendMessage) => {
+        props.addMessage(sendMessage)
     }
 
 
@@ -32,15 +28,9 @@ const Dialogs = (props) => {
                 {messagesElement}
             </div>
             <div>Показать больше диалогов</div>
-            {/*<div className={classes.addMessagesPage}>*/}
-            {/*    <div className={classes.addMessagesPageTextarea}>*/}
-            {/*        <textarea onChange={onMessageChange} value={state.newMessageText} ref={newMessagesElement}*/}
-            {/*                  />*/}
-            {/*    </div>*/}
-            {/*    <div className={classes.addMessagesPageButton}>*/}
-            {/*        <button onClick={onAddMessages}>Отправить сообщение</button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+
+            <DialogsFormSheme onAddMessages={onAddMessages}/>
+
         </div>
     );
 };

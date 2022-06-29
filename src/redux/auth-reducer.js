@@ -1,5 +1,5 @@
 import React from "react"
-import {usersAPI as userAPI, usersAPI} from "../api/api";
+import {authAPI, usersAPI as userAPI, usersAPI} from "../api/api";
 import {setTotalUsersCount, setUsers, toggleIsFetching} from "./user-reducer";
 
 const SET_USER_DATA = 'SET_USER_DATA'
@@ -19,11 +19,11 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true,
             }
         case SET_AUTH_CURRENT_USER:
-            return{
+            return {
                 ...state,
                 currentUser: action.currentUser,
             }
@@ -32,24 +32,45 @@ const authReducer = (state = initialState, action) => {
     }
 }
 export const setAuthCurrentUser = (currentUser) => ({type: SET_AUTH_CURRENT_USER, currentUser})
-export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}})
+export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login}, isAuth})
 
 
 export const getAuthUserData = () => {
     return (dispatch) => {
-        userAPI.headerMe()
+        authAPI.me()
             .then(response => {
                 if (response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData(id, email, login, true))
                     let userIdAuth = response.data.data.id
-                    userAPI.headerAuthPhoto(userIdAuth)
+                    authAPI.headerAuthPhoto(userIdAuth)
                         .then(response => {
                             dispatch(setAuthCurrentUser(response.data.photos.small))
                         })
                 }
             })
     }
+}
+
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+    debugger
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            debugger
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            }
+        })
+}
+
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+        })
 }
 
 export default authReducer

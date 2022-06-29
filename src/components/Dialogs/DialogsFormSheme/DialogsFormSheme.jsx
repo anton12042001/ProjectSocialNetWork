@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 
 
 const DialogsFormSheme = (props) => {
-
+debugger
     const {
         register,
         handleSubmit,
@@ -17,11 +17,13 @@ const DialogsFormSheme = (props) => {
     const onSubmit = (data) => {
         alert(JSON.stringify(data))
         reset()
+        props.onAddMessages(data)
+        debugger
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
-                    <textarea {...register("sendMessage")}
+                    <textarea placeholder={"Напишите сообщение..."} {...register("sendMessage")}
                     />
             <div >
                 <input type={"submit"} disabled={!isValid} />
