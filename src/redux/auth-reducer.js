@@ -1,10 +1,9 @@
 import React from "react"
-import {authAPI, usersAPI as userAPI, usersAPI} from "../api/api";
-import {setTotalUsersCount, setUsers, toggleIsFetching} from "./user-reducer";
-
+import {authAPI,} from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA'
-const UNFOLLOW = 'UNFOLLOW'
 const SET_AUTH_CURRENT_USER = "SET_AUTH_CURRENT_USER"
+const SET_ERROR_AUTH_USER_DATA = "SET_ERROR_AUTH_USER_DATA"
+const SER_ERROR_AUTH_USER = "SER_ERROR_AUTH_USER"
 
 let initialState = {
     userId: null,
@@ -12,6 +11,7 @@ let initialState = {
     login: null,
     isAuth: false,
     currentUser: null,
+    isError: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -26,12 +26,18 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 currentUser: action.currentUser,
             }
+        case SER_ERROR_AUTH_USER:
+            return{
+                ...state,
+                isError: true,
+            }
         default:
             return state;
     }
 }
+export const setErrorAuthUser = () => ({type: SER_ERROR_AUTH_USER,  })
 export const setAuthCurrentUser = (currentUser) => ({type: SET_AUTH_CURRENT_USER, currentUser})
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login,isAuth},})
+export const setAuthUserData = (userId, email, login, isAuth, isError) => ({type: SET_USER_DATA, payload: {userId, email, login,isAuth,isError},})
 
 
 export const getAuthUserData = () => {
@@ -53,13 +59,16 @@ export const getAuthUserData = () => {
 }
 
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+
+export const login = (email, password, rememberMe, isError) => (dispatch) => {
     debugger
     authAPI.login(email, password, rememberMe)
         .then(response => {
             debugger
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            } else {
+                dispatch(setErrorAuthUser())
             }
         })
 }
@@ -68,7 +77,7 @@ export const logout = () => (dispatch) => {
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false,))
+                dispatch(setAuthUserData(null, null, null, false, false))
             }
         })
 }

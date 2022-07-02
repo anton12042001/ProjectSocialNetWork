@@ -1,11 +1,11 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-
 const LoginInputSheme = (props) => {
     debugger
 
     const {
         register,
+        setError,
         formState: {
             errors,
             isValid,
@@ -14,14 +14,15 @@ const LoginInputSheme = (props) => {
         reset,
     } = useForm({
         mode:"onBlur",
+
     })
 
     const onSubmit = (data) => {
         debugger
-        alert(JSON.stringify(data))
         props.loginInfo(data)
         reset()
     }
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} action="">
@@ -45,6 +46,7 @@ const LoginInputSheme = (props) => {
                     password
                     <input type={"password"}
                            {...register('password', {
+
                                required: "Поле обязательно к заполнению",
                                minLength: {
                                    value: 5,
@@ -56,8 +58,9 @@ const LoginInputSheme = (props) => {
                 <div style={{height: 40}}>
                     {errors?.password && <p>{errors?.password?.message || "Error!"}</p>}
                 </div>
-
-
+                <div>
+                    {(props.isError) ? "Неверный логин или пароль" : " " }
+                </div>
                 <label>
                     Запомнить меня
                     <input type={"checkbox"}

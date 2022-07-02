@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from "../Profile";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile-reducer";
-import {useLocation, useNavigate, useParams,} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams,} from "react-router-dom";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
@@ -10,7 +10,7 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
     let userId = this.props.router.params.userId;
     if (!userId){
-        userId = 24369
+        userId = this.props.authorizedUserId
     }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -37,6 +37,8 @@ let mapStateToPropsForRedirect = (state) => ({
 let mapStateToProps = (state) => ({
     status: state.profilePage.status,
     profile: state.profilePage.profile,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 
