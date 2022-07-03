@@ -40,9 +40,8 @@ export const setAuthCurrentUser = (currentUser) => ({type: SET_AUTH_CURRENT_USER
 export const setAuthUserData = (userId, email, login, isAuth, isError) => ({type: SET_USER_DATA, payload: {userId, email, login,isAuth,isError},})
 
 
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        authAPI.me()
+export const getAuthUserData = () => (dispatch) => {
+        return  authAPI.me()
             .then(response => {
                 if (response.data.resultCode === 0) {
                     debugger
@@ -56,7 +55,7 @@ export const getAuthUserData = () => {
                 }
             })
     }
-}
+
 
 
 

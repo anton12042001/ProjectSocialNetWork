@@ -2,8 +2,6 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 
 const MyPostsFormSheme = (props) => {
-    debugger
-
     const {
         register,
         handleSubmit,
@@ -14,7 +12,6 @@ const MyPostsFormSheme = (props) => {
         alert(JSON.stringify(data))
         reset()
         props.onAddPost(data)
-        debugger
     }
 
 
