@@ -7,7 +7,13 @@ import MyPostsFormSheme from "./MyPostFormSheme/MyPostsFormSheme";
 
 
 const MyPosts = (props) => {
-    let postsElement = props.posts.map(p => <Post message={p.message} likesCounts={p.likesCount} key={p.id}/>)
+
+
+    let postsElement =
+        [...props.posts]
+        .reverse()
+        .map
+        (p => <Post message={p.message} likesCounts={p.likesCount} key={p.id}/>)
 
     let newPostElement = React.createRef();
     let onAddPost = (addNewPostText) => {
