@@ -8,13 +8,9 @@ let mapStateToProps = (state) => {
         friends: state.friendsPage.friends
     }
 }
-let mapDispatchToProps = () => {
-    return {
-
-    }
-}
 
 
-const FriendsContainer = connect (mapStateToProps, mapDispatchToProps)(Friends)
+
+const FriendsContainer = connect (mapStateToProps, null)(Friends)
 
 export default FriendsContainer;
