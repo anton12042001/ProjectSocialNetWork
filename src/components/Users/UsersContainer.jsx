@@ -27,6 +27,7 @@ class UsersContainer extends React.Component {
 
 
     onPageChanged = (pageNumber) => {
+        debugger
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -68,6 +69,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
 WithAuthRedirect,
-    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, requestUsers,})
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, requestUsers, })
 )   (UsersContainer)
 
