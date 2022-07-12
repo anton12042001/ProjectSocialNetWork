@@ -74,6 +74,7 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 
 export const requestUsers = (page, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
+    dispatch(setCurrentPage(page))
     let data = await usersAPI.getUsers(page, pageSize)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(data.items))
@@ -98,7 +99,7 @@ export const follow = (userId) => {
 }
 export const unfollow = (userId) => {
     return async (dispatch) => {
-        followUnfollowFlow(dispatch, usersAPI.follow.bind(usersAPI), followSucces, userId)
+        followUnfollowFlow(dispatch, usersAPI.unfollow.bind(usersAPI), unfollowSucces, userId)
 
     }
 }
