@@ -4,7 +4,6 @@ import {useForm} from "react-hook-form";
 
 
 const DialogsFormSheme = (props) => {
-debugger
     const {
         register,
         handleSubmit,
