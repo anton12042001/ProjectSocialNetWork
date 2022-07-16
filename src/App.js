@@ -2,9 +2,7 @@ import React from "react";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -14,6 +12,9 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 
+
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileInfo/ProfileContainer"));
 
 class App extends React.Component {
     componentDidMount() {
@@ -29,6 +30,7 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+                    <React.Suspense fullback={<div><Preloader/></div>}>
                     <Routes>
                         <Route path='/profile/:userId'
                                element={<ProfileContainer/>}/>
@@ -41,6 +43,7 @@ class App extends React.Component {
                         <Route path='/login/*'
                                element={<LoginPage/>}/>
                     </Routes>
+                    </React.Suspense>
                 </div>
             </div>
         );
