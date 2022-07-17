@@ -18,7 +18,7 @@ const ProfileInfo = (props) =>  {
                 {/*        alt=""/>*/}
                 {/*</div>*/}
                 <div className={classes.descriptionBlock}>
-                    <ProfileDescription profileDescription={props}/>
+                    <ProfileDescription savePhoto={props.savePhoto} isOwner={props.isOwner} profileDescription={props}/>
                     <ProfileStatusWithHooks updateStatus={props.updateStatus} status={props.status} />
                 </div>
             </div>
