@@ -1,8 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 const LoginInputSheme = (props) => {
-    debugger
-
     const {
         register,
         setError,
@@ -18,7 +16,6 @@ const LoginInputSheme = (props) => {
     })
 
     const onSubmit = (data) => {
-        debugger
         props.loginInfo(data)
         reset()
     }

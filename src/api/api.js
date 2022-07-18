@@ -31,7 +31,6 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-
     getProfile(userId){
         return  instance.get(`profile/` + userId)
     },
@@ -51,7 +50,10 @@ export const profileAPI = {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-    }
+    },
+    getDescriptionProfile(){
+        return instance.put('profile')
+    },
 }
 
 export const authAPI = {

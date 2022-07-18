@@ -1,11 +1,11 @@
 import React from 'react';
-import {profileAPI, usersAPI, usersAPI as userAPI} from "../api/api";
-import {setAuthCurrentUser, setAuthUserData} from "./auth-reducer";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+const SAVE_PROFILE_DESCRIPTION = "SAVE_PROFILE_DESCRIPTION"
 
 let initialState = {
     posts: [
@@ -15,6 +15,9 @@ let initialState = {
     ],
     profile: null,
     status: "",
+
+
+
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -53,7 +56,12 @@ const profileReducer = (state = initialState, action) => {
 
             }
         }
-
+        case SAVE_PROFILE_DESCRIPTION: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
         default:
             return state;
     }
@@ -62,6 +70,10 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
 export const addPostActionCreator = (addNewPostText) => ({type: ADD_POST, addNewPostText})
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+export const saveProfileDiscription = (lookingForAJob,facebook,instagram,vk,website,youtube) => ({
+    type: SAVE_PROFILE_DESCRIPTION,
+    payload: {lookingForAJob,facebook,instagram,vk,website,youtube}
+})
 
 
 export const getUserProfile = (userId) => async (dispatch) => {
@@ -86,6 +98,15 @@ export const savePhoto = (file) => async (dispatch) => {
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+
+export const getProfileDescription = (formData) => async (dispatch) => {
+    debugger
+    let response = await profileAPI.getDescriptionProfile(formData);
+    if (response.data.resultCode === 0) {
+        dispatch(saveProfileDiscription());
     }
 }
 

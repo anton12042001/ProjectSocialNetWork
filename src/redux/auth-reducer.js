@@ -60,9 +60,7 @@ export const authUserPhoto = () => async (dispatch) => {
 
 
 export const login = (email, password, rememberMe, isError) => async (dispatch) => {
-    debugger
     let response = await authAPI.login(email, password, rememberMe)
-    debugger
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData())
     } else {
