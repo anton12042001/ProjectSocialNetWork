@@ -9,17 +9,17 @@ import {getProfileDescription} from "../../../../redux/profile-reducer";
 
 const ProfileDescription = (props) => {
 
-    let  [editMode, setEditMode] = useState(false)
+    let [editMode, setEditMode] = useState(false)
 
-const profileInfoDescription = (formData) => {
+    const profileInfoDescription = (formData) => {
         debugger
         props.getProfileDescription(formData)
-    console.log(formData)
+        console.log(formData)
 
-}
+    }
 
     const onMainPhotoSelected = (e) => {
-        if(e.target.files.length){
+        if (e.target.files.length) {
             props.savePhoto(e.target.files[0])
         }
     }
@@ -35,7 +35,10 @@ const profileInfoDescription = (formData) => {
                 {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
             </div>
 
-            { editMode ? <ProfileAboutForm profileInfoDescription={profileInfoDescription} /> : <ProfileAbout goToEditMode={() => {setEditMode(true)}} isOwner={props.isOwner} profileAbout={props} /> }
+            {editMode ? <ProfileAboutForm profileInfoDescription={profileInfoDescription}/>
+                : <ProfileAbout goToEditMode={() => {
+                    setEditMode(true)
+                }} isOwner={props.isOwner} profileAbout={props}/>}
 
 
         </div>
@@ -43,10 +46,8 @@ const profileInfoDescription = (formData) => {
 };
 
 const mapStateToProps = () => {
-    return {
-
-    }
+    return {}
 }
 
 
-export default connect (mapStateToProps ,{getProfileDescription}) (ProfileDescription);
+export default connect(mapStateToProps, {getProfileDescription})(ProfileDescription);

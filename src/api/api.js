@@ -51,8 +51,9 @@ export const profileAPI = {
                 }
             });
     },
-    getDescriptionProfile(){
-        return instance.put('profile')
+    getDescriptionProfile(formData){
+        debugger
+        return instance.put('profile', formData)
     },
 }
 

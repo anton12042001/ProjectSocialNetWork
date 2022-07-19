@@ -1,5 +1,6 @@
 import React from 'react';
-import {profileAPI, usersAPI} from "../api/api";
+import {authAPI, profileAPI, usersAPI} from "../api/api";
+import {authUserPhoto, setAuthUserData} from "./auth-reducer";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -57,6 +58,7 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SAVE_PROFILE_DESCRIPTION: {
+            debugger
             return {
                 ...state,
                 ...action.payload
@@ -70,9 +72,17 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
 export const addPostActionCreator = (addNewPostText) => ({type: ADD_POST, addNewPostText})
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
-export const saveProfileDiscription = (lookingForAJob,facebook,instagram,vk,website,youtube) => ({
+export const saveProfileDiscription = (fullName,lookingForAJob,lookingForAJobDescription,aboutMe, {
+    contacts: {
+        facebook,
+        instagram,
+        vk,
+        website,
+        youtube
+    }}) => ({
     type: SAVE_PROFILE_DESCRIPTION,
-    payload: {lookingForAJob,facebook,instagram,vk,website,youtube}
+    payload: {fullName,lookingForAJob,lookingForAJobDescription,aboutMe, contacts:{facebook,  instagram, vk, website, youtube} }
+
 })
 
 
@@ -102,11 +112,15 @@ export const savePhoto = (file) => async (dispatch) => {
 }
 
 
-export const getProfileDescription = (formData) => async (dispatch) => {
+
+export const getProfileDescription = (formData) => async (dispatch, getState) => {
+    const userId = getState().auth.userId
     debugger
-    let response = await profileAPI.getDescriptionProfile(formData);
+    const response = await profileAPI.getDescriptionProfile(formData);
     if (response.data.resultCode === 0) {
-        dispatch(saveProfileDiscription());
+        debugger
+        dispatch(saveProfileDiscription(formData));
+        dispatch(getUserProfile(userId))
     }
 }
 

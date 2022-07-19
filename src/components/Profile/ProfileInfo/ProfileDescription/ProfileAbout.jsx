@@ -5,15 +5,20 @@ const ProfileAbout = (props) => {
 
     const localProps = props.profileAbout.profileDescription.profile
 
+    //todo переписать сравнения
+
     return (
         <div className={classes.aboutBlock}>
             <div>{localProps.fullName}</div>
-            <div>{localProps.aboutMe === null || undefined ? " " : localProps.profile.aboutMe}</div>
+            <div>{localProps.aboutMe === null || undefined ? " " : localProps.aboutMe}</div>
             <div>
                 Работа: {localProps.lookingForAJob ? (<div>Ищу работу</div>) : (<div>Не хочу работать</div>)}
             </div>
             <div>
-                Facebook: {localProps.contacts.facebook === null || undefined || " " ? " " + "Не указано" : " " + localProps.contacts.facebook}
+                Описание к работе: {localProps.lookingForAJobDescription === null ||localProps.lookingForAJobDescription === undefined ||localProps.lookingForAJobDescription === " " ? " " + "Не указано" : " " + localProps.lookingForAJobDescription}
+            </div>
+            <div>
+                Facebook: {localProps.contacts.facebook === null ||localProps.contacts.facebook === undefined || localProps.contacts.facebook === " " ? " " + "Не указано" : " " + localProps.contacts.facebook}
             </div>
             <div>
                 instagram: {localProps.contacts.instagram === null || undefined ? "Не указано" : " " + localProps.contacts.instagram}
