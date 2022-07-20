@@ -17,8 +17,6 @@ const ProfileAboutForm = (props) => {
     })
 
     const onSubmit = (formData) => {
-        debugger
-
         props.profileInfoDescription(formData)
 
     }

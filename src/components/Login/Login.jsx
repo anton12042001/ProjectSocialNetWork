@@ -7,25 +7,32 @@ import {Navigate} from "react-router-dom";
 
 
 const Login = (props) => {
-debugger
     const loginInfo = (data) => {
-        props.login(data.email, data.password, data.rememberMe)
+        debugger
+        props.login(data.email, data.password, data.rememberMe, data.captcha)
     }
+
+
     if(props.isAuth) {
         return  <Navigate to={"/profile"}/>
     }
+
+
     const onError = (isError) => {
         setErrorAuthUser(isError)
     }
+
+
     return (
         <div>
             <h1>Login</h1>
-            <LoginInputSheme  isError={props.isError} loginInfo={loginInfo}/>
+            <LoginInputSheme captchaUrl={props.captchaUrl}   isError={props.isError} loginInfo={loginInfo}/>
         </div>
     )
 };
 
 const mapStateToProps = (state) => ({
+    captchaUrl: state.auth.captchaUrl,
     isAuth: state.auth.isAuth,
     isError: state.auth.isError,
 })

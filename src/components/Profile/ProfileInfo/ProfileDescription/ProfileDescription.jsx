@@ -12,7 +12,7 @@ const ProfileDescription = (props) => {
     let [editMode, setEditMode] = useState(false)
 
     const profileInfoDescription = (formData) => {
-        debugger
+        setEditMode(false)
         props.getProfileDescription(formData)
         console.log(formData)
 
@@ -23,6 +23,7 @@ const ProfileDescription = (props) => {
             props.savePhoto(e.target.files[0])
         }
     }
+
 
     return (
         <div className={classes.descriptionInfo}>
@@ -46,7 +47,9 @@ const ProfileDescription = (props) => {
 };
 
 const mapStateToProps = () => {
-    return {}
+    return {
+
+    }
 }
 
 

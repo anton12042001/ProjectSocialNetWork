@@ -16,10 +16,10 @@ const LoginInputSheme = (props) => {
     })
 
     const onSubmit = (data) => {
+        // reset()
         props.loginInfo(data)
-        reset()
     }
-
+debugger
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} action="">
@@ -58,14 +58,19 @@ const LoginInputSheme = (props) => {
                 <div>
                     {(props.isError) ? "Неверный логин или пароль" : " " }
                 </div>
-                <label>
-                    Запомнить меня
-                    <input type={"checkbox"}
-                           {...register('rememberMe',)}
-                    />
-                </label>
-
-
+                <div>
+                    <label>
+                        Запомнить меня
+                        <input type={"checkbox"}
+                               {...register('rememberMe',)}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <div>{props.captchaUrl && <img src={props.captchaUrl} alt=""/>}
+                        {props.captchaUrl && "Введите символы"}</div>
+                    <div>{props.captchaUrl && <input type="text"{...register('captcha',)}/>}</div>
+                </div>
                 <input type="submit" disabled={!isValid} />
             </form>
 

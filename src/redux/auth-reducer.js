@@ -1,10 +1,11 @@
 import React from "react"
-import {authAPI,} from "../api/api";
+import {authAPI, securityAPI,} from "../api/api";
 
 const SET_USER_DATA = 'samurai-network/auth/    SET_USER_DATA'
 const SET_AUTH_CURRENT_USER = "SET_AUTH_CURRENT_USER"
 const SET_ERROR_AUTH_USER_DATA = "SET_ERROR_AUTH_USER_DATA"
 const SER_ERROR_AUTH_USER = "SER_ERROR_AUTH_USER"
+const GET_CAPTCHA_URL_SUCCESS = "GET_CAPTCHA_URL_SUCCESS"
 
 let initialState = {
     userId: null,
@@ -12,12 +13,14 @@ let initialState = {
     login: null,
     isAuth: false,
     currentUser: null,
-    isError: false
+    isError: false,
+    captchaUrl: null,
 }
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA:
+        case GET_CAPTCHA_URL_SUCCESS:
             return {
                 ...state,
                 ...action.payload,
@@ -32,15 +35,17 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isError: true,
             }
+
         default:
             return state;
     }
 }
 export const setErrorAuthUser = () => ({type: SER_ERROR_AUTH_USER,})
 export const setAuthCurrentUser = (currentUser) => ({type: SET_AUTH_CURRENT_USER, currentUser})
-export const setAuthUserData = (userId, email, login, isAuth, isError) => ({
+export const getCaptchaUrlSuccess = (captchaUrl) => ({type: GET_CAPTCHA_URL_SUCCESS, payload: {captchaUrl}})
+export const setAuthUserData = (userId, email, login, isAuth, isError, ) => ({
     type: SET_USER_DATA,
-    payload: {userId, email, login, isAuth, isError},
+    payload: {userId, email, login, isAuth, isError, },
 })
 
 
@@ -59,19 +64,30 @@ export const authUserPhoto = () => async (dispatch) => {
 }
 
 
-export const login = (email, password, rememberMe, isError) => async (dispatch) => {
-    let response = await authAPI.login(email, password, rememberMe)
+export const login = (email, password, rememberMe, captcha, isError,) => async (dispatch) => {
+    debugger
+    let response = await authAPI.login(email, password, rememberMe,captcha)
     if (response.data.resultCode === 0) {
+        dispatch(getCaptchaUrlSuccess(null))
         dispatch(getAuthUserData())
+    } else if(response.data.resultCode === 10) {
+        dispatch(getCaptchaUrl())
+
     } else {
         dispatch(setErrorAuthUser())
     }
 }
 
+export const getCaptchaUrl = () => async (dispatch) => {
+    const response = await securityAPI.getCaptchaUrl()
+    const captchaUrl = response.data.url
+    dispatch(getCaptchaUrlSuccess(captchaUrl))
+}
+
 export const logout = () => async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false, false))
+        dispatch(setAuthUserData(null, null, null, false, false, ))
     }
 }
 
