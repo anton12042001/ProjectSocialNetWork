@@ -16,7 +16,7 @@ const LoginInputSheme = (props) => {
     })
 
     const onSubmit = (data) => {
-        // reset()
+        reset()
         props.loginInfo(data)
     }
 debugger

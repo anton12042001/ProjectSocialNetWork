@@ -52,7 +52,7 @@ export const profileAPI = {
             });
     },
     getDescriptionProfile(formData){
-        debugger
+
         return instance.put('profile', formData)
     },
 }

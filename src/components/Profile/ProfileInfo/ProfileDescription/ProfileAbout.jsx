@@ -10,7 +10,7 @@ const ProfileAbout = (props) => {
     return (
         <div className={classes.aboutBlock}>
             <div>{localProps.fullName}</div>
-            <div>{localProps.aboutMe === null || undefined ? " " : localProps.aboutMe}</div>
+            <div>Обо мне: {localProps.aboutMe === null || undefined ? " " : localProps.aboutMe}</div>
             <div>
                 Работа: {localProps.lookingForAJob ? (<div>Ищу работу</div>) : (<div>Не хочу работать</div>)}
             </div>

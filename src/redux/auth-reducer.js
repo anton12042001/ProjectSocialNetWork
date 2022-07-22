@@ -1,5 +1,6 @@
 import React from "react"
-import {authAPI, securityAPI,} from "../api/api";
+import {authAPI, profileAPI, securityAPI,} from "../api/api";
+import {savePhoto, savePhotoSuccess} from "./profile-reducer";
 
 const SET_USER_DATA = 'samurai-network/auth/    SET_USER_DATA'
 const SET_AUTH_CURRENT_USER = "SET_AUTH_CURRENT_USER"
@@ -57,11 +58,19 @@ export const getAuthUserData = () => async (dispatch) => {
         dispatch(authUserPhoto)
     }
 }
+
+
+
+//todo сделать фотку в header при логине
 export const authUserPhoto = () => async (dispatch) => {
     let userIdAuth = response.data.data.id
     let response = await authAPI.headerAuthPhoto(userIdAuth)
     dispatch(setAuthCurrentUser(response.data.photos.small))
 }
+
+
+
+
 
 
 export const login = (email, password, rememberMe, captcha, isError,) => async (dispatch) => {

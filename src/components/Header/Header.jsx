@@ -4,6 +4,10 @@ import {NavLink} from "react-router-dom";
 import userAuthImg from "../../assets/images/user.png"
 
 const Header = (props) => {
+
+
+    //todo сделать фотку в header при логине
+
     return (
         <header className={classes.header}>
             <img
