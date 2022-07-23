@@ -23,7 +23,7 @@ const MyPostsFormSheme = (props) => {
                 />
             </div>
             <div>
-                <input  type={"submit"} />
+                <input disabled={true}  type={"submit"} />
             </div>
         </form>
     );
